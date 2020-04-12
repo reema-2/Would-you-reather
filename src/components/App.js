@@ -7,18 +7,19 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router , Switch} from 'react-router-dom'
 import { connect } from 'react-redux'
 import Routes from './Routes'
+import '../App.css'
 class App extends Component {
   componentDidMount() {
     this.props.dispatch(handleInitialData())
   }
   render() {
     return (
-      <LoadingBar />,
-      <Router> 
+      <Router>  
         <Switch>
           {this.props.authedUser === null
             ?<Fragment>
               <Nav />
+              <LoadingBar/>
               <Login/> 
             </Fragment> 
             :<Fragment>

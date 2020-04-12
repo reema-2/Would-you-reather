@@ -3,12 +3,17 @@ import { connect } from 'react-redux'
 import {handleSaveAnswer} from '../actions/user'
 import { Redirect } from 'react-router-dom';
 class AnswerQuestions extends Component {
+    state={
+        isDisabled:true
+    }
+    onSiteChanged = () => {
+        this.setState({
+            isDisabled:false
+        })
+    }
     saveAnswerd = (e) => {  
-
         e.preventDefault()  
-
         const {dispatch, questions} = this.props
-
         if (document.getElementById('inlineRadio1').checked) {
             const Value = document.getElementById("inlineRadio1").value;
             dispatch(handleSaveAnswer(
@@ -22,11 +27,13 @@ class AnswerQuestions extends Component {
                 Value
              ))
           }
-    
         this.props.history.push(`/questions/${questions.id}`)
     }
     
     render() {
+        if (this.props.badPath === true) {
+            return <Redirect to="/NotFuond" />;
+        }
         if (this.props.badPath === true) {
             return <Redirect to="/NotFuond" />;
         }
@@ -51,14 +58,14 @@ class AnswerQuestions extends Component {
                                 <form onSubmit={this.saveAnswerd}>
                                     <p>{questionAuthed.name}</p>
                                     <div className="form-check form-check-inline d-block">
-                                        <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"  value="optionOne"/>
+                                        <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"  value="optionOne"  onChange={this.onSiteChanged}/>
                                         <label className="form-check-label" htmlFor="inlineRadio1">{questions.optionOne.text}</label>
                                     </div>
                                     <div className="form-check form-check-inline">
-                                        <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="optionTwo"/>
+                                        <input className="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="optionTwo"  onChange={this.onSiteChanged}/>
                                         <label className="form-check-label" htmlFor="inlineRadio2">{questions.optionTwo.text}</label>
                                     </div>
-                                    <button type="submit" className="btn btn-outline-secondary d-block mt-4" >Submit</button>
+                                    <button type="submit" className="btn btn-outline-secondary d-block mt-4" disabled  = {this.state.isDisabled}>Submit</button>
                                 </form>
                             </div> 
                         </div>                         

@@ -17,8 +17,8 @@ export function handleInitialData() {
     return dispatch => {
       dispatch(showLoading())
       return getInitialData().then(({ users, questions }) => {
-        dispatch(receiveQuestion(questions));
-        dispatch(receiveUsers(users));
+        dispatch(receiveQuestion(questions))
+        dispatch(receiveUsers(users))
         dispatch(hideLoading())
       });
     };

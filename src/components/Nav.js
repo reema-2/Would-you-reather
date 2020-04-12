@@ -1,5 +1,5 @@
 import React ,{Component} from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import {setAuthedUser} from '../actions/authedUser'
 import user from '../user.svg'
@@ -14,14 +14,7 @@ class Nav extends Component {
         return (
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
                 <div className="collapse navbar-collapse" id="navbarNav">
-                <span className='navbar-brand mr-3'>{ userauth !== undefined && userauth.name}</span>
-                        <img
-                            src={ userauth !== undefined ? userauth.avatarURL : user}
-                            alt={`Avatar of ${ userauth !== undefined && userauth.name}`}
-                            width='35'
-                            className='mr-5'
-                            />
-                    <ul className="navbar-nav">
+                    <ul className="navbar-nav w-100">
                         <li className="nav-item">
                             <NavLink to='/' className='nav-link' exact activeClassName='active'>
                                 Home
@@ -37,12 +30,16 @@ class Nav extends Component {
                                 Leader Board
                             </NavLink>
                         </li>
-                        <li className="nav-item">
-                          <NavLink to='/' onClick={this.handleSubmit} className='nav-link' activeClassName='active'>
-                                Log out
-                            </NavLink>  
-                        </li>
                     </ul>
+                    <span className='navbar-brand mr-3'>{ userauth !== undefined && userauth.name}</span>
+                        <img
+                            src={ userauth !== undefined ? userauth.avatarURL : user}
+                            alt={`Avatar of ${ userauth !== undefined && userauth.name}`}
+                            width='35'
+                            />
+                        <Link to='/' onClick={this.handleSubmit} className='nav-link text-muted'>
+                            LogOut 
+                        </Link>
                 </div>
             </nav>
         )
