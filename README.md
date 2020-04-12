@@ -37,6 +37,8 @@ A new browser window should automatically open displaying the app.  If it doesn'
     │   └── Routes,js 
     ├── middleware/ 
     ├── reducers/ 
+    ├── utils/ 
+    │    ├── _Data.js #this file represents a fake database and methods that let you access the data. The only thing you need to edit in the _DATA.js file is the value of avatarURL. Each user should have an avatar, so you’ll need to add the path to each user’s avatar.
 
 ```
 ## Create React App
