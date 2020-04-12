@@ -26,9 +26,9 @@ A new browser window should automatically open displaying the app.  If it doesn'
     ├── actions/
     ├── Components
     │   ├── App.js 
-    │   ├── Home.js # user should be able to toggle between his/her answered and unanswered polls on the home page, which is located at the root.
+    │   ├── Home.js # user able to toggle between his/her answered and unanswered polls on the home page.
     │   ├── LeaderBoard.js # shows ranking of users based on total number of answered and unanswered polls
-    │   ├── Login.js # in this component having a login box that appears at the root of the application that lets the user select a name from the list of existing users.
+    │   ├── Login.js # show login box that lets the user select a name from the list of existing users.
     │   ├── Nav.js 
     │   ├── NewQuestion.js # to add new question
     │   ├── NoMatchPage.js # 404 page
