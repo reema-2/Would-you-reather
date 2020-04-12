@@ -33,7 +33,7 @@ A new browser window should automatically open displaying the app.  If it doesn'
     │   ├── NewQuestion.js # to add new question
     │   ├── NoMatchPage.js # 404 page
     │   ├── Questions.js # show list of the question based on user selected 'unanswered' or 'answered'
-    │   ├── Result.js # show question details
+    │   ├── QuestionDetails.js # show question details
     │   └── Routes,js 
     ├── middleware/ 
     ├── reducers/ 
