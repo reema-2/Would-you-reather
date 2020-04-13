@@ -30,22 +30,22 @@ class Home extends Component {
                 <div className="text-center">
                 <ul className="nav nav-tabs">
                     <li className="nav-item">
-                        <p className={this.state.activNavUnq} onClick={(e) => this.unanswerdQuestions()} >Unanswerd Questions</p>
+                        <p className={this.state.activNavUnq} onClick={(e) => this.unanswerdQuestions()} >Unanswered Questions</p>
                     </li>
                     <li className="nav-item">
-                        <p className={this.state.activNavQ} onClick={(e) => this.answerdQuestions()} href='#'>Answerd Questions</p>
+                        <p className={this.state.activNavQ} onClick={(e) => this.answerdQuestions()} href='#'>Answered Questions</p>
                     </li>
                 </ul>
                 </div>
                 {   this.state.unanswerdView
                         ?this.props.unanswerdQuestionsIds.map((id) => (
                         <div className='card m-5' key={id}>
-                        <Question id={id} answerd={'unanswerd'}/>
+                        <Question id={id} isAnswered={false}/>
                         </div>
                         ))
                         :this.props.answerdQuestionsIds.map((id) => (
                         <div className='card m-5' key={id}>
-                        <Question id={id} answerd={'answerd'}/>
+                        <Question id={id} isAnswered={true}/>
                         </div>
                         ))
                 }
@@ -56,9 +56,9 @@ class Home extends Component {
 
 function mapStateToProps ({ question , user, authedUser }) {
 
-    const authedUsr = user[authedUser]
+    const loginUser = user[authedUser]
 
-    const answeredQuestions = Object.keys(authedUsr.answers)
+    const answeredQuestions = Object.keys(loginUser.answers)
     .sort((a,b) => question[b].timestamp - question[a].timestamp)
 
     const unanswerdQuestions = Object.keys(question).filter(x => !answeredQuestions.includes(x));
@@ -66,7 +66,7 @@ function mapStateToProps ({ question , user, authedUser }) {
     return {
         answerdQuestionsIds:answeredQuestions,
         unanswerdQuestionsIds:unanswerdQuestions,
-        authedUsr
+        loginUser
     }
 }
 

@@ -4,7 +4,7 @@ import {_saveQuestionAnswer } from '../utils/_Data'
 import {saveAnswerQuestion} from './question'
 export const SAVE_ANSWER ='SAVE_ANSWER'
 export const RECEIVE_USERS = 'RECEIVE_USERS'
-export const ADD_USAR_QUESTION = 'ADD_USAR_QUESTION'
+export const ADD_USER_QUESTION = 'ADD_USER_QUESTION'
 
 export function receiveUsers (user) {
   return {
@@ -15,7 +15,7 @@ export function receiveUsers (user) {
 
 export function addUserQuestion ( authedUser , id ){
   return {
-    type: ADD_USAR_QUESTION,
+    type: ADD_USER_QUESTION,
     authedUser,
     id
   }

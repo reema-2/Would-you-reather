@@ -1,10 +1,18 @@
 import React, { Component , Fragment} from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import {  withRouter } from 'react-router-dom';
 class Question extends Component {
-  
+    constuctor() {
+        this.loadQuestionDetails = this.routeChange.bind(this);
+      }
+      loadQuestionDetails(e, questionId) {
+        let path = `/questions/`+questionId;
+        this.props.history.push(path);
+
+      }
+
     render() {
-        const { questions , userLogin, answerd} = this.props
+        const { questions , userLogin, isAnswered} = this.props
         const { optionOne , id} = questions
         const { name, avatarURL } = userLogin
 
@@ -19,24 +27,22 @@ class Question extends Component {
                             alt={`Avatar of ${name}`}
                             width='150'
                             />
+                            <p className='pt-3 pl-4 mb-0'>{name}</p>
                         </div>
                         <div className='col-md-7'>
-                            <p>{name}</p>
+                            <p>Would you rather</p>
                             <p>{optionOne.text} or ...</p>
-                            {answerd === 'answerd'
-                                ?<Link to={`/questions/${id}`}>
-                                <button type="button" className="btn btn-outline-secondary"> View Poll</button>
-                                </Link>
-                                :<Link to={`/questions/${id}`}>
-                                <button type="button" className="btn btn-outline-secondary"> View Poll</button>
-                                </Link>                  
+                            {isAnswered === true
+                               ? <button type="button" className="btn btn-outline-secondary" onClick={(e) => this.loadQuestionDetails(e, id)}> View Poll</button>
+                                :<button type="button" className="btn btn-outline-secondary" onClick={(e) => this.loadQuestionDetails(e, id)}> Submit Poll </button>
+                               
                             }
 
                         
                         </div>
                     </div>
                 </div>
-            </Fragment>
+            </Fragment>           
         )
     }
 }
@@ -54,5 +60,5 @@ function mapStateToProps ({ authedUser, question, user }, {id ,answerd}) {
     }
 }
 
-export default connect(mapStateToProps)(Question) 
+export default withRouter(connect(mapStateToProps)(Question))
   

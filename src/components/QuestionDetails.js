@@ -27,15 +27,12 @@ class AnswerQuestions extends Component {
                 Value
              ))
           }
-        this.props.history.push(`/questions/${questions.id}`)
+        this.props.history.push({pathname:`/questions/${questions.id}` , state:{question_id: questions.id}})
     }
     
     render() {
         if (this.props.badPath === true) {
-            return <Redirect to="/NotFuond" />;
-        }
-        if (this.props.badPath === true) {
-            return <Redirect to="/NotFuond" />;
+            return <Redirect to="/notFuond" />
         }
         const { questions ,questionAuthed , authedAnswerdQ1 , authedAnswerdQ2} = this.props
         const {optionOne , optionTwo} = questions
@@ -87,13 +84,13 @@ class AnswerQuestions extends Component {
                             <div className='col-md-7'>
                                 <h3>Results</h3>
                                 <div className='col-md-12 border rounded my-3 p-3'>
-                                    <p className='text-success'> {authedAnswerdQ1.length === 1 && 'Your votes' }</p>
+                                    <p className='text-success'> {authedAnswerdQ1.length === 1 && 'You voted' }</p>
                                     <p>Wold you rather {optionOne.text}</p> 
                                     <p>{optionOne.votes.length} out of {optionOne.votes.length + optionTwo.votes.length} votes</p>
                                     <p>{optionOne.votes.length >0 ? (optionOne.votes.length * 100 ) / (optionOne.votes.length + optionTwo.votes.length): 0 }%</p>
                                 </div>
                                 <div className='col-md-12 border rounded my-3 p-3'>
-                                    <p className='text-success'>{authedAnswerdQ2.length=== 1 && 'Your votes'}</p>
+                                    <p className='text-success'>{authedAnswerdQ2.length=== 1 && 'You voted'}</p>
                                     <p>Wold you rather {optionTwo.text}</p> 
                                     <p>{optionTwo.votes.length} out of {optionOne.votes.length + optionTwo.votes.length} votes</p>
                                     <p>{optionTwo.votes.length >0 ? (optionTwo.votes.length * 100 ) / (optionOne.votes.length + optionTwo.votes.length): 0 }%</p>
@@ -107,14 +104,15 @@ class AnswerQuestions extends Component {
         )
     }
 }
-function mapStateToProps ({ authedUser, question, user }, props) {
-    if (question[props.match.params.id] === undefined) {
+function mapStateToProps ({ authedUser, question, user },  {match} ) {
+   const {id} = match.params;
+    if (id === undefined) {
         const badPath = true
        return {
         badPath
        }
       }else{
-        const questions = question[props.match.params.id];
+        const questions = question[id];
         const questionAuthed = user? user[questions.author] :null
         const authedUs = user[authedUser]
         const authedAnswerdQ1 = questions.optionOne.votes.filter(x => authedUs.id.includes(x))

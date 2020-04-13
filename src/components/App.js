@@ -1,10 +1,9 @@
 import React, { Component, Fragment } from 'react'
 import Nav from './Nav'
-import Login from './Login'
 import LoadingBar from 'react-redux-loading'
 import { handleInitialData } from '../actions/shared'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter as Router , Switch} from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Routes from './Routes'
 import '../App.css'
@@ -13,29 +12,22 @@ class App extends Component {
     this.props.dispatch(handleInitialData())
   }
   render() {
+     const { notLoggedIn } = this.props;
     return (
-      <Router>  
-        <Switch>
-          {this.props.authedUser === null
-            ?<Fragment>
-              <Nav />
-              <LoadingBar/>
-              <Login/> 
-            </Fragment> 
-            :<Fragment>
-              <Nav />
-              <Routes />
-            </Fragment>
-          }
-          </Switch>
-      </Router>
+      <Router>
+      <Fragment>     
+          <Nav/>
+          <LoadingBar/>
+          <Routes notLoggedIn={notLoggedIn}/>
+      </Fragment>
+    </Router>
     )
   }
 }
 
 function mapStateToProps ({ authedUser }) {
   return {
-    authedUser
+    notLoggedIn: authedUser === null
   }
 }
 
