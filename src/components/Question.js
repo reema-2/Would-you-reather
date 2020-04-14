@@ -8,7 +8,6 @@ class Question extends Component {
       loadQuestionDetails(e, questionId) {
         let path = `/questions/`+questionId;
         this.props.history.push(path);
-
       }
 
     render() {
@@ -34,8 +33,7 @@ class Question extends Component {
                             <p>{optionOne.text} or ...</p>
                             {isAnswered === true
                                ? <button type="button" className="btn btn-outline-secondary" onClick={(e) => this.loadQuestionDetails(e, id)}> View Poll</button>
-                                :<button type="button" className="btn btn-outline-secondary" onClick={(e) => this.loadQuestionDetails(e, id)}> Submit Poll </button>
-                               
+                               :<button type="button" className="btn btn-outline-secondary" onClick={(e) => this.loadQuestionDetails(e, id)}> Submit Poll </button> 
                             }
 
                         
@@ -47,7 +45,6 @@ class Question extends Component {
     }
 }
 function mapStateToProps ({ authedUser, question, user }, {id ,answerd}) {
-
     const questions = question[id];
     const userLogin = user? user[questions.author] :null
     const authedUs = user[authedUser]
@@ -56,7 +53,6 @@ function mapStateToProps ({ authedUser, question, user }, {id ,answerd}) {
         questions,
         userLogin,
         answerd
-    
     }
 }
 

@@ -4,7 +4,6 @@ import {setAuthedUser} from '../actions/authedUser'
 class Login extends Component {
     handleSubmit = () =>{
         const slecteValue = document.getElementById("exampleFormControlSelect1").value
-        console.log("slecteValue",slecteValue)
         const {dispatch} = this.props
         dispatch(setAuthedUser(slecteValue)) 
       }
@@ -36,7 +35,6 @@ function mapStateToProps ({ authedUser, question, user }) {
     const users = Object.values(user);
     return {
         authedUser, question, users
-    
     }
 }
 

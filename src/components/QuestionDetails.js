@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import {handleSaveAnswer} from '../actions/user'
 import { Redirect } from 'react-router-dom';
 class AnswerQuestions extends Component {
-    state={
+    state={ 
         isDisabled:true
     }
     onSiteChanged = () => {
@@ -106,7 +106,8 @@ class AnswerQuestions extends Component {
 }
 function mapStateToProps ({ authedUser, question, user },  {match} ) {
    const {id} = match.params;
-    if (id === undefined) {
+   console.log("hhhcff",question[id])
+    if (question[id] === undefined) {
         const badPath = true
        return {
         badPath
